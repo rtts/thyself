@@ -74,4 +74,4 @@ A smartphone app that uses a widget to say that you just did something.
 A measurement is added with timestamp(, and sent to web api). You can share
 your results.
 
-Start app
+The app must work offline. 
