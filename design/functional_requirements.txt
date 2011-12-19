@@ -1,0 +1,10 @@
+Functional requirements:
+- Thyself must provide users with an interface to add, edit, and remove questions
+- Thyself must provide users with an interface to answer questions
+- Thyself must provide users with an interface to download and view answered questions
+- Thyself must provide users with an interface to combine questions into a collection
+- Thyself must provide users with an interface to select collections for which they are authenticated
+- Thyself must send unanswered questions to the user at the right time
+- Thyself must be able to synchronize with the phone
+- Thyself must be able to let users log in
+- Thyself must provide access controls for collections (items are private by default)
