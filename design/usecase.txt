@@ -1,77 +1,86 @@
-Thyself
+Terminology:
+- Program
+- Set
+- Item
+- Answer Widget
+- Start Program
+- Add Program
+- Your Programs
+- Unstarted Program
+- Started Program
+- Completed Program
 
-The project consists of various components. All data is stored in a central place.
-This place can be approached by the other components, data can be requested and
-edited. There are management and client accounts. Management accounts can be linked
-to one or more client accounts, and view the results of these accounts. A Client
-can be linked to multiple management accounts. The client can be seen as the data
-provider, the person that enters the answers to questions. A Manager is a data
-gatherer, that can view (& edit?) and download gathered information.
+A Program consists of zero or more Sets, which in turn consist of zero or
+more Items. Each Item has zero or one Answer Widget. 
 
-In the most simple case, a user wants to ask questions to himself. The user in
-this case owns both a management and a client account. 
+A Program, Set, and Item has a Statistics Hook, which means you can define
+proper type of statistics for each (with sane defaults).
 
+Use Case: Register
+A guest enters information and becomes a user.
+PRE: None
+Main Flow:
+1. The use case starts when the guest visits the register page.
+2. The guest enters username, email-address, password
+3. Optionally, guest enters sex, age, location.
+4. While the information is incomplete
+  4.1 The system asks the guest for the information again.
+5. An email is send with a activation link.
+6. The guest visits this link and becomes a user.
+POST: Guest is now a user.
+Alternate Flows:
+6. The guest doesn't visit the activation link within a week.
+7. The activation link expires.
 
-Management Console:
-- login / logout
-- view the list of clients
-- view the list of questions
-- view the summarized results per question
-- view answers of all clients per question
-- view answers of all questions per client
-- download the results
-- edit answered questions (?)
-- add a question
-- add an existing question
-- add a collection of existing questions
-- compare results of client for existing question with others
-- compare summarized result of client for existing collection with others
-- edit a recurring question
+Use Case: Login
+A user gives his credentials and becomes logged in.
+PRE: None
+Main Flow:
+1. The use case starts when the user visits the login page.
+2. The user fills in his credentials.
+3. While the credentials are false
+   3.1 The system prompts the user for his credentials.
+4. The right credentials are passed, the user gets logged in.
+POST: The user is logged in.
 
-Client app:
-- login / logout
-- answer pending questions
-- see / edit answered questions (?)
-- smartphone extra: receive notification when new pending question (optional)
-- smartphone extra: use widgets / shortcuts for answering specific questions (optional)
+Use Case: Choose existing Program
+The User chooses a program to follow
+Preconditions: The user is logged in.
+Main Flow:
+1. The use case starts when the user visits the 'programs' page.
+2. The system shows all public programs
+3. The user chooses a program
+4. The program is added to Your Programs
+POST: A new program is available to Your Programs.
 
+Use Case: Create or Edit a Program
+User creates or edits a Program.
+PRE: User is logged in, and on the Your Programs page
+Main Flow:
+1. The use case starts when the user selects "Create Program" or "Fork Program"
+2. If "Create Program"
+   2.1 The user sees an empty program with one empty, unnamed set
+3. If the user selects Add Item
+   3.1 A new, empty item appears in the Set
+4. If the user selects Add Set
+   4.1 New, empty, unnamed set appears
+5. The user can change all Program, Set, and Item properties on this page
+6. The user clicks "Save"
+POST: The edited program is now available
 
-Use Case: Psychology researcher
-The researcher will only use the management part of the app. Adding the
-questions could be done using the web interface or by uploading a
-standardized question file. The researcher creates multiple private collections, one
-for each research group. It should be possible to change a collection, so
-that collections can be transformed into other collections. The questions in
-a collection can have an order, so that they are asked in the right order.
+Use Case: Answer Item
+User answers an item
+PRE: User is logged in, viewing the home page
+Main Flow:
+1. User spots an interesting item in her feed
+2. User provides neccesary details to the answer widget
+3. Item disappears, answer is saved
+POST: User is logged in viewing the home page with one item less
 
-Now the researcher has multiple collections. He wants each participant to
-fill in one collection. Each collection will have a unique identifier. The
-researcher can tell the client what the identifier is, and the client can
-use this identifier to 'subscribe' to this collection.
-
-A collection consists of one or more questions. Each question can be asked
-one time or recurring. The questions are ordered. 
-
-
-Use Case: Client Smartphone
-The app is opened to reveal the pending questions, and the answered
-questions. User can click on an question to answer it, and swi
-
-
-Type of questions:
-* I just did something. Not really an question answer type of thing,
-  but should be possible. Maybe not show these in pending questions,
-  but in some other way. Should provide widget that can be clicked.
-* How much ... did you do from yesterday to today? 
-* Normal question
-
-
-
-
-Let's make things easier.
-
-A smartphone app that uses a widget to say that you just did something.
-A measurement is added with timestamp(, and sent to web api). You can share
-your results.
-
-The app must work offline. 
+Use Case: View Statistics
+The user views statistics about his/her completed programs
+PRE: User is logged in, on the Your Programs page
+Main Flow:
+1. User selects one of the programs
+2. On the Program Page, graphs and tables are shown for all answers
+POST: User knows herself a little better
