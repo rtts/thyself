@@ -1,0 +1,62 @@
+App Engine Frameworks
+---------------------
+App Engine specific
+
+Frameworks designed specifically for App Engine.
+
+  GAEO - Google App Engine Oil
+    
+    Somewhere between webapp and Django in complexity
+    Not yet fully developed, seems amateuristic (partly due to the bad
+    english)
+    
+  GAE Framework
+    
+    Designed for high-load sites
+    Seems amateuristic
+    They recommend using ubuntu and eclipse :O
+    
+  Kay (also based on Werkzeug and Jinja2)
+    
+    
+    
+  MVCEngine
+  
+    Has something to do with Rails, yuk
+  
+  tipfy (oh yeah, we love it!)
+    
+    Extended version of webapp: i18n, sessions, own authentication, flash
+    messages and more
+    
+    uses Werkzeug
+    
+  webapp
+  
+    Yeah we know this one..
+  
+  webapp2 
+    
+    webapp2 is a single file that follows the simplicity of webapp, but
+    improves it in some ways: it adds better URI routing and exception
+    handling, a full featured response object and a more flexible
+    dispatching mechanism.
+    
+    webapp2 also offers the package webapp2_extras with several optional
+    utilities: sessions, localization, internationalization, domain and
+    subdomain routing, secure cookies and others.
+    
+
+Conclusion:
+It is hard for me to decide which is the best, since I don't really know
+what we are looking for. I thought our app engine site only had to do the
+api stuff, and it shouldn't provide users with the website. in that case,
+you wouldn't need templates, right? And if you don't need templates, then
+what do you need a framework for?
+
+As I understand, we don't want anything as bloated as Django, but maybe an
+alternative / extension to webapp. Werkzeug seems interesting, professional,
+stable. But this is only a library, not a framework. 
+
+I'd say we just use webapp, it has the most extensive tutorial, and I guess
+most developers use it..?
