@@ -1,29 +1,36 @@
 #!/usr/bin/env python
-from werkzeug.routing import Map, Rule
+from werkzeug.wrappers import Request, Response
+from werkzeug.routing import Map, Rule, NotFound, RequestRedirect
 import yaml
+from httplib import HTTPException
+
+def index(request, **values):
+  return Response('hello to index!')
+ 
+endpoints = {'index': index}
 
 # populate map
 rules = []
 stream = file('manifest.yaml', 'r')
 uris = yaml.load(stream)['uris']
 for name in uris:
-  rules.append(Rule(uris[name]['path'], name))
+  rules.append(Rule(uris[name]['path'], endpoint=name))
 map = Map(rules)
-# it works!
-exit()
 
 def dispatch(request):
-  map.bind_to_environ(request.environ)
-  endpoint, values = adapter.match()
+  adapter = map.bind_to_environ(request.environ)
   try:
-    eval("%s_%s" % (request.method.lower(), endpoint))
-  except:
-    pass
+    endpoint, values = adapter.match()
+    response = endpoints[endpoint](request, **values)
+  except HTTPException, e:
+    response = e
+  return response
 
-def application(environ, start_response):
-  request = Request(environ)
-  dispatch(request)
-  
+@Request.application
+def application(request):
+  response = dispatch(request)
+  return response
+ 
 if __name__ == '__main__':
   from werkzeug.serving import run_simple
   run_simple('localhost', 4000, application)
