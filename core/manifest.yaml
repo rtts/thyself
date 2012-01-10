@@ -1,0 +1,61 @@
+name: Thyself
+description: >
+    Thyself is a web service that offers a complete, scientific solution for administering
+    questionnaires to human participants
+
+uris:
+  - name: index
+    path: /
+    methods:
+      - type: GET
+  
+  - name: users
+    path: /users/
+    methods:
+      - type: GET
+      - type: POST
+  
+  - name: user
+    path: /users/<id>
+    methods:
+      - type: GET
+      - type: DELETE
+  
+  - name: programs
+    path: /programs/
+      - type: GET
+      - type: POST
+  
+  - name: program
+    path: /programs/<id>
+    methods:
+      - type: GET
+      - type: DELETE
+  
+  - name: sets
+    path: /sets/
+      - type: GET
+      - type: POST
+  
+  - name: set
+    path: /sets/<id>
+    methods:
+      - type: GET
+      - type: DELETE
+  
+  - name: moments
+    path: /moments/
+      - type: GET
+      - type: POST
+  
+  - name: moment
+    path: /moments/<id>
+    methods:
+      - type: GET
+      - type: DELETE
+  
+  - name: answers
+    path: /answers/<id>
+        methods:
+      - type: GET
+      - type: DELETE
