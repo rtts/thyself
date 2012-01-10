@@ -1,0 +1,42 @@
+Thyself Elevator Pitch
+----------------------
+What is the overlapping feature of tests, questionnaires, quizzes, and self
+measurements? What do you do when you want to know how happy your employees
+are, how your diet is working out, or how much you know about history? You
+ask questions! You can ask others or yourself, the questions can be about
+satisfaction, weight, or the golden era, but something is definitely
+asked. This also means that a response is given. This response can be right
+or wrong (in a quiz), it can be comparable to other people's responses, or
+it might just be something you need to remember.
+
+Thyself offers a platform on which all these different applications (and
+more!) can be, built. If you are a user of Thyself, you may use it to keep 
+track of your fitness program, take some quizzes once in a while, or even perform
+research! You can decide for yourself what you want to ask yourself or
+others, and what responses you expect. If you decide this might be helpful
+for others, you can bundle your questions in a program and release it to 
+the public! 
+
+When you own a smartphone, you can use it to help you with the programs you
+are following. It will remind you when you have to answer a question, and
+can even be used offline!
+
+Some questions simply cannot be answered by a computer alone. 
+
+
+
+
+
+Thyself offers a complete solution for questionnaires, tests, and
+measurements. 
+
+It aims to be a platform on which several websites can be built.
+
+Its unique feature is adding recurring questions to the domain
+of questioning. 
+
+Thyself offers social and clinical psychologists, as well as consumers the
+possibility to create and publish testing programs.
+
+There is a large market for internet-based testing, but none of them use
+smartphones to efficiently get responses.
