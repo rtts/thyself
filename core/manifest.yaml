@@ -1,19 +1,42 @@
 name: Thyself
 description: >
-    Thyself is a web service that offers a complete, scientific solution for administering
-    questionnaires to human participants
+
+  Thyself is a web service that offers a complete solution for scientific
+  research involving human participants.
+
+  This document well, ehh, documents the various API calls you can make to
+  our public RESTful API located at http://core.thyself.nl/
 
 uris:
   index:
     path: /
     methods:
       - get
+    description: >
+
+      The root URI ('/') of the API is the main entry point from where you
+      can discover the URIs of all services offered by the core API. The
+      response simply contains a list of URIs.
+      
+      If you're reading this, however, you will soon know the URIs of all
+      services, and you will probably never need to actually request the
+      root URI.
 
   users:
     path: /users/
     methods:
-      - get
       - post
+    description: >
+      
+      A user is a human being that can participate in tests and create new
+      tests for herself and others. Users are authenticated via HTTP Basic
+      Auth (using a username and password).
+      
+      Adding a user to the system is as simple as POSTing at least a
+      username, password, and email address to this URI. The system may
+      respond with a captcha challenge to abusive clients.
+      
+      GETting /users/ is not allowed.
 
   user:
     path: /users/<id>
@@ -21,12 +44,35 @@ uris:
       - get
       - put
       - delete
+    description: >
+
+      You can request details from any user given the correct user id.
+      However, the information returned will be sparse; only a username.
+      
+      If you authenticate yourself and request your own user details you will
+      get the full set of data, including email, birth-date, gender, and
+      place.
+      
+      You can change this data by PUTting the updated user object, or delete
+      your account using DELETE.
 
   programs:
     path: /programs/
     methods:
       - get
       - post
+    description:
+      
+      A program is a complete package for researching a human participant.
+      It contains some metadata (title, description, creation date,
+      visibility) and an ordered list of sets of items.
+      
+      The list of returned programs is limited to the first 25 entries and sorted
+      alphabetically by title by default. You can change this by using one
+      of the following query parameters: offset, sort (title, date, popularity),
+      or tag.
+      
+      POSTing a program object will save a new program to the database.
 
   program:
     path: /programs/<id>
@@ -34,6 +80,13 @@ uris:
       - get
       - put
       - delete
+    description:
+    
+      Requesting individual programs will return all the program details (if
+      you are authorized to view them) and a list of sets that the program
+      contains. Further requests are needed to retrieve the contents of the
+      sets. This way, sets can be recycled across programs. PUTting and
+      DELETEing programs will update or delete them.
   
   set:
     path: /sets/<id>
@@ -41,12 +94,30 @@ uris:
       - get
       - put
       - delete
+    description:
+    
+      A set is a collection of items that can be reused across programs.
+      
+      You cannot request a list of sets at /sets/, only individual sets of
+      which you discovered the id by browsing programs.  The response
+      contains all of the set metadata, a list of links to moment objects,
+      all of the contained items, and possibly links to included subsets.
   
   moments:
     path: /moments/
     methods:
       - get
       - post
+    description:
+      
+      A measuring moment symbolizes a particular time or a recurring moment
+      in time that is associated with a set of questions.
+      
+      Requesting all moments while authenticated will get you your personal
+      timeline; a list of links to sets of items that you should complete
+      ordered chronologically.
+      
+      POSTing will result in a new moment being created.
   
   moment:
     path: /moments/<id>
@@ -54,12 +125,31 @@ uris:
       - get
       - put
       - delete
+    description:
+    
+      There is not much use in GETting particular measuring moments, since
+      all the moment data can be obtained by requesting your timeline at
+      /moments/
+      
+      You can change or delete moments with PUT and DELETE, respectively.
   
   answers:
     path: /answers/
     methods:
       - get
       - post
+    description:
+     
+      You can retrieve all of the answers to all programs in which you have
+      participated by simply GETting /answers/ while authenticated.
+      However, please don't do this too often since it's quite a
+      burden on our servers. It is best used to export all of your
+      data before you delete your account.
+      
+      To get specific answers, please supply one of the following query
+      parameters: program=<id>, set=<id>, user=<id>
+      
+      The answers of other users will of cause be anonymized.
 
   answer:
     path: /answers/<id>
@@ -67,3 +157,6 @@ uris:
       - get
       - put
       - delete
+    description:
+    
+      The road to changing or deleting specific answers.
