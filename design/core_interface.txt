@@ -1,0 +1,20 @@
+Base URI: know.thyself.nl
+
+/programs
+  GET: sends a list of all existing programs
+  POST: add a program
+
+/programs/<id>
+  HEAD: sends the meta-data of the program with the given id
+  GET: sends the data of the program with the given id
+  PUT: changes the program with the given id
+  DELETE: deletes the program with the given id
+  
+/sets
+
+/items
+
+/users/<user-id>
+/programs/<program-id>
+/sets/<set-id>
+/items/<item-id>
