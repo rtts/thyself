@@ -4,58 +4,66 @@ description: >
     questionnaires to human participants
 
 uris:
-  - name: index
+  index:
     path: /
     methods:
-      - type: GET
-  
-  - name: users
+      - get
+
+  users:
     path: /users/
     methods:
-      - type: GET
-      - type: POST
-  
-  - name: user
+      - get
+      - post
+
+  user:
     path: /users/<id>
     methods:
-      - type: GET
-      - type: DELETE
-  
-  - name: programs
+      - get
+      - put
+      - delete
+
+  programs:
     path: /programs/
-      - type: GET
-      - type: POST
-  
-  - name: program
+    methods:
+      - get
+      - post
+
+  program:
     path: /programs/<id>
     methods:
-      - type: GET
-      - type: DELETE
+      - get
+      - put
+      - delete
   
-  - name: sets
-    path: /sets/
-      - type: GET
-      - type: POST
-  
-  - name: set
+  set:
     path: /sets/<id>
     methods:
-      - type: GET
-      - type: DELETE
+      - get
+      - put
+      - delete
   
-  - name: moments
+  moments:
     path: /moments/
-      - type: GET
-      - type: POST
+    methods:
+      - get
+      - post
   
-  - name: moment
+  moment:
     path: /moments/<id>
     methods:
-      - type: GET
-      - type: DELETE
+      - get
+      - put
+      - delete
   
-  - name: answers
+  answers:
+    path: /answers/
+    methods:
+      - get
+      - post
+
+  answer:
     path: /answers/<id>
-        methods:
-      - type: GET
-      - type: DELETE
+    methods:
+      - get
+      - put
+      - delete
