@@ -8,3 +8,40 @@ Functional requirements:
 - Thyself must be able to synchronize with the phone
 - Thyself must be able to let users log in
 - Thyself must provide access controls for collections (items are private by default)
+
+
+
+- The programs that are open to follow
+    GET /programs/available
+- The programs I am currently enrolled in
+    GET /programs/active
+- The programs that I already finished
+    GET /programs/finished
+- The programs on my wishlist?
+    GET /programs/wishlist
+- All programs that are associated with me (currently enrolled + finished +
+  wishlist)
+    GET /programs
+
+
+Een programma bestaat uit sets. Ieder van deze sets kan zelfgemaakt zijn of
+overgenomen uit een ander programma. Statistieken kunnen gaan over een item
+of zelfs over een hele set. Vergelijking met anderen kan plaatsvinden als
+het specifieke item of de set door meerdere users 'gedaan/beantwoord' is.
+
+We hebben een tabel "Items in Set" en "Answers". Gegeven een set kun je alle
+items bepalen, en van die items alle antwoorden. Misschien moet dit per user
+gebeuren? Ik stel me een situatie voor waarin je jouw gemiddelde van een set
+wil vergelijken met het gemiddelde van anderen. Dan moet je van iedereen het
+gemiddelde berekenen
+
+GET /scores?item=<item-id>&item=<item-id> etc
+  geeft ruwe antwoorden van users op deze items
+en/of
+GET /scores?set=<set-id>&set=<set-id> etc
+  geeft gemiddeldes van users op deze sets
+
+
+
+- Hoe neem je een set over uit een ander programma?
+- Wat doen we met het meerdere keren volgen van een programma?
