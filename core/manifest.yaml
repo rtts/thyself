@@ -61,7 +61,7 @@ uris:
     methods:
       - get
       - post
-    description:
+    description: >
       
       A program is a complete package for researching a human participant.
       It contains some metadata (title, description, creation date,
@@ -138,7 +138,7 @@ uris:
     methods:
       - get
       - post
-    description:
+    description: >
      
       You can retrieve all of the answers to all programs in which you have
       participated by simply GETting /answers/ while authenticated.

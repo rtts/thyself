@@ -10,3 +10,4 @@
 /app/.project
 /app/.settings
 /db/
+*.pyc
