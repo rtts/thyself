@@ -5,7 +5,7 @@ description: >
   research involving human participants.
 
   This document well, ehh, documents the various API calls you can make to
-  our public RESTful API located at http://core.thyself.nl/
+  our public RESTful API located at http://know.thyself.nl/
 
 uris:
   index:
