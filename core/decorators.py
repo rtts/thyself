@@ -1,5 +1,5 @@
 import bcrypt
-from settings import db
+from settings import db, BCRYPT_WORK_FACTOR, BCRYPT_REGEX
 from functools import wraps
 from werkzeug.wrappers import Response
 from werkzeug.exceptions import Unauthorized
@@ -27,9 +27,35 @@ def members_only(f):
 
                 # straight from http://www.mindrot.org/projects/py-bcrypt/
                 if bcrypt.hashpw(password, hashed) == hashed:
+                    
+                    # rehash with new work factor if necessary
+                    if not BCRYPT_REGEX.search(password).group() == BCRYPT_WORK_FACTOR:
+                        newpass = bcrypt.hashpw(password, bcrypt.gensalt(BCRYPT_WORK_FACTOR))
+                        
+                        # a modifier update, see www.mongodb.org/display/DOCS/Updating
+                        db.users.update({'username': username}, {'$set': {'password': newpass}})
+                    
                     return f(request, *args, **kwargs)
 
         r = Response(status=401)
         r.www_authenticate.set_basic(realm='Please authenticate thyself')
         return r
     return wrapper
+
+def accepts(mimetype):
+    '''
+    A decorator that accepts one string argument. If it is equal to the
+    Content-Type header sent by the client, the decorated function will be
+    executed. Else, a 415 response is returned.
+    '''
+    
+    def decorator(f):
+        @wraps(f)
+        def wrapper(request, *args, **kwargs):
+            if request.headers['Content-Type'] == mimetype:
+                return f(request, *args, **kwargs)
+            else:
+                return Response(status=415) # Unsupported media type
+        return wrapper
+    return decorator
+    
