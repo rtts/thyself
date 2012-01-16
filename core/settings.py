@@ -4,7 +4,7 @@ import re
 from werkzeug.routing import Map, Rule
 
 DB_NAME = "thyself"
-BCRYPT_WORK_FACTOR = 5
+BCRYPT_WORK_FACTOR = '05'
 BCRYPT_REGEX = re.compile(r'^....(..)') # place of work factor in existing hashes
 
 db = pymongo.Connection()[DB_NAME]

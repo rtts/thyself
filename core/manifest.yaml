@@ -7,6 +7,33 @@ description: >
   This document well, ehh, documents the various API calls you can make to
   our public RESTful API located at http://know.thyself.nl/
 
+post-representations: # required fields when posting data
+  users:
+    - username
+    - password
+  subscriptions:
+    - program    # a program-id
+  programs:
+    - sets       # list of set ids
+  sets:
+    - items      # list of items ids
+    - moments    # list of moments
+  items:
+    - 
+
+get-representations:
+  user:
+    - username
+  subscription:
+    - program    # program-id
+  program:
+    - sets       # list of sets (including links)
+  set:
+    - items      # list of items (including links)
+    - moments    # list of moments
+  item:
+    - 
+
 uris:
   index:
     path: /
@@ -24,6 +51,7 @@ uris:
 
   users:
     path: /users/
+    
     methods:
       - post
     description: >
@@ -103,35 +131,15 @@ uris:
       contains all of the set metadata, a list of links to moment objects,
       all of the contained items, and possibly links to included subsets.
   
-  moments:
-    path: /moments/
+  item:
+    path: /sets/<set-id>/items/<item-id>
     methods:
-      - get
-      - post
-    description:
-      
-      A measuring moment symbolizes a particular time or a recurring moment
-      in time that is associated with a set of questions.
-      
-      Requesting all moments while authenticated will get you your personal
-      timeline; a list of links to sets of items that you should complete
-      ordered chronologically.
-      
-      POSTing will result in a new moment being created.
-  
-  moment:
-    path: /moments/<id>
-    methods:
-      - get
       - put
       - delete
     description:
-    
-      There is not much use in GETting particular measuring moments, since
-      all the moment data can be obtained by requesting your timeline at
-      /moments/
       
-      You can change or delete moments with PUT and DELETE, respectively.
+      There is no /sets/<id>/items/ because the list of items links is retrieved at
+      /sets/<id>
   
   answers:
     path: /answers/
