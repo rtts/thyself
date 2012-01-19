@@ -1,37 +1,35 @@
-#!/usr/bin/env python
-import yaml
-import json
-from bson import ObjectId, json_util
-from werkzeug.wrappers import Response, Request
-from pymongo import ASCENDING, DESCENDING
+import db
+from utils import members_only, respond, ok, decode
+from werkzeug.exceptions import Forbidden
 
-def get(request, db, uris, **values):
-  # handle url values
-  program_id = values['id']
-  
-  # handle query parameters (in request.args)
-  
-  # retrieve representation from db
-  program = db.programs.find_one({'_id': ObjectId(program_id)})
+def owner(request, program):
+    return request.authorization['username'] == program['owner-name']
 
-  # create representation
-  representation = program # maybe links?
-  
-  # create a response
-  return Response(json.dumps(representation, indent=2, default=json_util.default), content_type='text/plain')
+def get(request, id):
+    '''
+    Returns the full representation of a program.
+    '''
+    program = db.get_or_404('programs', id)
+    # TODO: translate set ids to hrefs
+    #ids = [ObjectId(x) for x in program['sets']]
+    #sets = get_list('sets', {'_id': {'$in': ids}})
+    return respond(program)
 
-def put(request, db, uris, **values):
-  program_id = values['id']
-  data = json.loads(request.data, object_hook=json_util.object_hook)
-  db.programs.update({'_id': ObjectId(program_id)}, data)
-  return Response('edited')
-  
-def delete(request, db, uris, **values):
-  program_id = values['id']
-  db.programs.remove({'_id': ObjectId(program_id)})
-  # make the right response
-  return Response('deleted')
-  
-if __name__ == "__main__":
-  import doctest
-  doctest.testmod()
+@members_only
+def put(request, id):
+    program = db.get_or_404('programs', id)
+    if not owner(request, program):
+        raise Forbidden
+    data = decode(request.data)
+    db.update('programs', id, data)
+    return ok()
+
+@members_only
+def delete(request, id):
+    program = db.get_or_404('programs', id)
+    if not owner(request, program):
+        raise Forbidden
+    if db.has_stuff('programs', program):
+        raise Conflict
+    db.remove('programs', id)
+    return ok()

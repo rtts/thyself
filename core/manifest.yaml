@@ -7,33 +7,6 @@ description: >
   This document well, ehh, documents the various API calls you can make to
   our public RESTful API located at http://know.thyself.nl/
 
-post-representations: # required fields when posting data
-  users:
-    - username
-    - password
-  subscriptions:
-    - program    # a program-id
-  programs:
-    - sets       # list of set ids
-  sets:
-    - items      # list of items ids
-    - moments    # list of moments
-  items:
-    - 
-
-get-representations:
-  user:
-    - username
-  subscription:
-    - program    # program-id
-  program:
-    - sets       # list of sets (including links)
-  set:
-    - items      # list of items (including links)
-    - moments    # list of moments
-  item:
-    - 
-
 uris:
   index:
     path: /
@@ -54,6 +27,7 @@ uris:
     
     methods:
       - post
+    
     description: >
       
       A user is a human being that can participate in tests and create new
@@ -132,7 +106,7 @@ uris:
       all of the contained items, and possibly links to included subsets.
   
   item:
-    path: /sets/<set-id>/items/<item-id>
+    path: /sets/<set_id>/<item_id>
     methods:
       - put
       - delete

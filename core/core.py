@@ -1,12 +1,15 @@
 #!/usr/bin/env python
-import index, programs, program
-from settings import map
+import index, programs, program, users, user
+from settings import rule_map
 from werkzeug.wrappers import Request, Response
 from werkzeug.exceptions import HTTPException, NotFound, BadRequest
 
 @Request.application
 def application(request):
-    adapter = map.bind_to_environ(request.environ)
+    # TODO: support conditional GET requests
+    # by inserting Last-Modified and eTag header elements
+    # and interpreting If-Modified-Since and If-None-Match header elements
+    adapter = rule_map.bind_to_environ(request.environ)
     try:
         endpoint, values = adapter.match()
         response = eval(endpoint)(request, **values)
